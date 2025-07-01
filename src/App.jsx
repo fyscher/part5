@@ -134,11 +134,11 @@ const App = () => {
               handleURLChange={handleURLChange}
             />
             <button onClick={handleLogout}>Log Out</button>
+            <Blogs
+              blogs={blogs}
+              />
           </div>
       }
-      <Blogs
-        blogs={blogs}
-      />
     </div>
   )
 }
