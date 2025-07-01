@@ -41,6 +41,17 @@ const App = () => {
     )  
   }, [])
 
+  useEffect(()=>
+  {
+    const loggedUserJSON = window.localStorage.getItem('loggedBlogUser')
+    if (loggedUserJSON)
+    {
+      const user = JSON.parse(loggedUserJSON)
+      setUser(user)
+      blogService.setToken(user.token)
+    }
+  }, [])
+
   const handleLogin = async e =>
   {
     e.preventDefault()
@@ -53,6 +64,9 @@ const App = () => {
         password
       })
 
+      window.localStorage.setItem(
+        'loggedBlogUser', JSON.stringify(user)
+      )
       blogService.setToken(user.token)
       setUser(user)
       setUsername('')
@@ -63,6 +77,14 @@ const App = () => {
       setErrorMessage('Wrong Credentials')
       setTimeout(() => setErrorMessage(null), 5000)
     }
+  }
+
+  const handleLogout = () =>
+  {
+    window.localStorage.removeItem('loggedBlogUser')
+      blogService.setToken('')
+      setUser('')
+      location.reload()
   }
 
   // add all handlers here
@@ -101,7 +123,7 @@ const App = () => {
             setPassword={setPassword}
           />
         : <div>
-            <p>{user.name} currently logged in</p>
+            { user ?<p>{user.name} currently logged in</p> :null}
             <AddBlog
               newTitle={newTitle}
               newAuthor={newAuthor}
@@ -111,6 +133,7 @@ const App = () => {
               handleTitleChange={handleTitleChange}
               handleURLChange={handleURLChange}
             />
+            <button onClick={handleLogout}>Log Out</button>
           </div>
       }
       <Blogs
