@@ -12,6 +12,7 @@ const App = () => {
   const [errorMessage, setErrorMessage] = useState(null)
   const [errorStatus, setErrorStatus] = useState('')
   const [user, setUser] = useState(null)
+
   const blogFormRef = useRef()  
 
   const notify = (label, message) =>
@@ -82,6 +83,18 @@ const App = () => {
     } 
   }
 
+  const like = async ({title, author, url, likes, id}) =>
+  {
+    const updateObject = { title, author, url, likes }
+    const res = await blogService.update(id, updateObject)
+    console.log('res ', res)
+    console.log('res.id ', res.id)
+    const newBlogs = blogs.map( i => i.id !== res.id? i: res)
+    console.log('blogs ', blogs)
+    console.log('newBlogs ', newBlogs)
+    setBlogs(newBlogs)
+  }
+
   return (
     <div>
       <Notification
@@ -96,7 +109,10 @@ const App = () => {
           <BlogForm newObject={addBlog} />
         </Togglable>
         <Togglable buttonLabel="Blogs">
-          <Blogs blogs={blogs} />
+          <Blogs 
+            blogs={blogs}
+            data={like}
+          />
         </Togglable> 
       </div>
       : <Togglable buttonLabel="Login">

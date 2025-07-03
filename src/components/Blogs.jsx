@@ -1,7 +1,7 @@
 import Blog from './Blog'
 import DelBlog from './DelBlog'
 
-const Blogs = ({ blogs }) =>
+const Blogs = ({ blogs, data }) =>
 {
     return(
     <div>
@@ -10,11 +10,9 @@ const Blogs = ({ blogs }) =>
         <div key={`D_${blog.id}`}>
             <Blog 
                 blog={blog}
-                id={blog.id}
+                data={data}
             />
-            <DelBlog
-                id={blog.id}
-            />
+            <DelBlog/>
         </div>
     )}
     </div>
