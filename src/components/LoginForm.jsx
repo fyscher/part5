@@ -1,15 +1,30 @@
-const Login = ({
-    username,
-    password,
-    handleLogin,
-    handleUsernameChange,
-    handlePasswordChange
+import { useState } from "react"
+
+const LoginForm = ({
+    userCreds,
 }) =>
 {
+    const [username, setUsername] = useState('')
+    const [password, setPassword] = useState('')
+
+    const handleUsernameChange = e => setUsername(e.target.value)
+    const handlePasswordChange = e => setPassword(e.target.value)
+
+    const login = e =>
+    {
+        e.preventDefault()
+        userCreds({
+            username,
+            password
+        })
+        setUsername('')
+        setPassword('')
+    }
+
     return (
         <div>
             <h2>Login</h2>
-            <form onSubmit={handleLogin}>
+            <form onSubmit={login}>
                 <div>
                     username
                     <input
@@ -34,4 +49,4 @@ const Login = ({
     )
 }
 
-export default Login;
+export default LoginForm;
