@@ -1,4 +1,5 @@
 import Blog from './Blog'
+import DelBlog from './DelBlog'
 
 const Blogs = ({ blogs }) =>
 {
@@ -6,7 +7,15 @@ const Blogs = ({ blogs }) =>
     <div>
     <h2>blogs</h2>
     {blogs.map(blog =>
-        <Blog key={blog.id} blog={blog} />
+        <div key={`D_${blog.id}`}>
+            <Blog 
+                blog={blog}
+                id={blog.id}
+            />
+            <DelBlog
+                id={blog.id}
+            />
+        </div>
     )}
     </div>
     )

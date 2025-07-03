@@ -5,6 +5,7 @@ import loginService from './services/login'
 import AddBlog from './components/AddBlog'
 import Login from './components/Login'
 import Notification from './components/Notification'
+import DelBlog from './components/DelBlog'
 
 const App = () => {
   const [blogs, setBlogs] = useState([])
@@ -32,7 +33,7 @@ const App = () => {
   {
     setErrorStatus(label);
     setErrorMessage(message);
-    setTimeout(() => {setStatusMessage(null)}, 5000);
+    setTimeout(() => {setErrorMessage(null)}, 5000);
   }
 
   useEffect(() => {
@@ -107,6 +108,8 @@ const App = () => {
       setTimeout(()=> setErrorMessage(null), 5000)
     } 
   }
+
+  
 
   return (
     <div>
