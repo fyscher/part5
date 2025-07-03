@@ -5,7 +5,7 @@ import loginService from './services/login'
 import AddBlog from './components/AddBlog'
 import Login from './components/Login'
 import Notification from './components/Notification'
-import DelBlog from './components/DelBlog'
+import Togglable from './components/Togglable'
 
 const App = () => {
   const [blogs, setBlogs] = useState([])
@@ -17,6 +17,7 @@ const App = () => {
   const [newTitle, setNewTitle] = useState('')
   const [newAuthor, setNewAuthor] = useState('')
   const [newURL, setNewURL] = useState('')
+  const [loginVisible, setLoginVisible] = useState(false)
 
   const newObject =
   {
@@ -28,6 +29,8 @@ const App = () => {
   const handleTitleChange = e => setNewTitle(e.target.value)
   const handleAuthorChange = e => setNewAuthor(e.target.value)
   const handleURLChange = e => setNewURL(e.target.value)
+  const handleUsernameChange = e => setUsername(e.target.value)
+  const handlePasswordChange = e => setPassword(e.target.value)
 
   const notify = (label, message) =>
   {
@@ -109,24 +112,16 @@ const App = () => {
     } 
   }
 
-  
-
   return (
     <div>
       <Notification
         errorMessage={errorMessage}
         errorStatus={errorStatus}
       />
-      { user === null
-        ? <Login
-            username={username}
-            password={password}
-            handleLogin={handleLogin}
-            setUsername={setUsername}
-            setPassword={setPassword}
-          />
-        : <div>
-            { user ?<p>{user.name} currently logged in</p> :null}
+      { user
+        ? <Togglable buttonLabel="Add Blog">
+          <p>{user.name} currently logged in</p>
+          <button onClick={handleLogout}>Log Out</button>
             <AddBlog
               newTitle={newTitle}
               newAuthor={newAuthor}
@@ -135,13 +130,20 @@ const App = () => {
               handleAuthorChange={handleAuthorChange}
               handleTitleChange={handleTitleChange}
               handleURLChange={handleURLChange}
-            />
-            <button onClick={handleLogout}>Log Out</button>
+              />
             <Blogs
               blogs={blogs}
               />
-          </div>
-      }
+        </Togglable> 
+      : <Togglable buttonLabel="Login">
+        <Login
+          username={username}
+          password={password}
+          handleLogin={handleLogin}
+          handleUsernameChange={handleUsernameChange}
+          handlePasswordChange={handlePasswordChange}
+        />
+      </Togglable> }
     </div>
   )
 }
