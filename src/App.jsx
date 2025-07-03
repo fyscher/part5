@@ -119,9 +119,10 @@ const App = () => {
         errorStatus={errorStatus}
       />
       { user
-        ? <Togglable buttonLabel="Add Blog">
+        ? <div>
           <p>{user.name} currently logged in</p>
           <button onClick={handleLogout}>Log Out</button>
+          <Togglable buttonLabel="Add Blog">
             <AddBlog
               newTitle={newTitle}
               newAuthor={newAuthor}
@@ -131,10 +132,13 @@ const App = () => {
               handleTitleChange={handleTitleChange}
               handleURLChange={handleURLChange}
               />
+          </Togglable>
+          <Togglable buttonLabel="Blogs">
             <Blogs
               blogs={blogs}
               />
-        </Togglable> 
+          </Togglable> 
+        </div>
       : <Togglable buttonLabel="Login">
         <Login
           username={username}
