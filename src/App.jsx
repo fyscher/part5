@@ -1,3 +1,4 @@
+import './static/App.css'
 import { useState, useEffect, useRef } from 'react'
 import Blogs from './components/Blogs'
 import blogService from './services/blogs'
@@ -93,6 +94,7 @@ const App = () => {
     console.log('blogs ', blogs)
     console.log('newBlogs ', newBlogs)
     setBlogs(newBlogs)
+    location.reload()
   }
 
   return (

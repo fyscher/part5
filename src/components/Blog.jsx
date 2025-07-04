@@ -3,7 +3,7 @@ import { useState } from "react"
 const Blog = ({ blog, data }) => 
 {
   const [visible, setVisible] = useState(false)
-  
+  const [likeCount, setLikeCount] = useState()
   const hideWhenVisible = { display: visible? 'none' : '' }
   const showWhenVisible = { display: visible? '' : 'none' }
 

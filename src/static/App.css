@@ -1,0 +1,16 @@
+.blogs
+{
+    background-color: gray;
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+}
+
+.blog
+{
+    background-color: lightgray;
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    margin: 1rem;
+    width: 20rem;
+
+}
