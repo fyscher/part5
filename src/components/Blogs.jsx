@@ -3,6 +3,8 @@ import DelBlog from './DelBlog'
 
 const Blogs = ({ blogs, data }) =>
 {
+    blogs.sort(( a, b ) => b.likes - a.likes)
+    
     return(
     <div className='blogs'>
         <h2>blogs</h2>
