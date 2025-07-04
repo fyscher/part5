@@ -1,21 +1,14 @@
-import blogService from '../services/blogs'
-
-const DelBlog = ({ id }) =>
+const DelBlog = ({ deleteData, id, title }) =>
 {
-    const handleDeleteBlog = async e =>
+    const deleteBlog = async e =>
     {
         e.preventDefault()
-        try{
-        console.log(id)
-        const res = await blogService.remove(id)
-        console.log(res.data)
-        }
-        catch (exception)
-        {
-        console.log(exception)
-        }
+        deleteData({
+            title,
+            id
+        })
     }
-    return <button type="button" onClick={handleDeleteBlog}>Delete</button>
+    return <button type="button" onClick={deleteBlog}>Delete</button>
 }
 
 export default DelBlog;

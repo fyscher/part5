@@ -1,10 +1,9 @@
 import Blog from './Blog'
-import DelBlog from './DelBlog'
 
-const Blogs = ({ blogs, data }) =>
+const Blogs = ({ blogs, likeData, deleteData }) =>
 {
     blogs.sort(( a, b ) => b.likes - a.likes)
-    
+
     return(
     <div className='blogs'>
         <h2>blogs</h2>
@@ -12,9 +11,9 @@ const Blogs = ({ blogs, data }) =>
             <div key={`D_${blog.id}`} className='blog'>
                 <Blog 
                     blog={blog}
-                    data={data}
+                    likeData={likeData}
+                    deleteData={deleteData}
                 />
-                <DelBlog/>
             </div>
         )}
     </div>

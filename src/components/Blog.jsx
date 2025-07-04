@@ -1,22 +1,23 @@
 import { useState } from "react"
+import DelBlog from "./DelBlog"
 
-const Blog = ({ blog, data }) => 
+const Blog = ({ blog, likeData, deleteData }) => 
 {
   const [visible, setVisible] = useState(false)
-  const [likeCount, setLikeCount] = useState()
+  const [likes, setLikes] = useState(blog.likes)
   const hideWhenVisible = { display: visible? 'none' : '' }
   const showWhenVisible = { display: visible? '' : 'none' }
 
   const toggleVisibility = () => setVisible(!visible)
-
-  const like = e =>
+  const like = async e =>
   {
     e.preventDefault()
-    data({
+    setLikes(likes + 1)
+    likeData({
       title: blog.title,
       author: blog.author,
       url: blog.url,
-      likes: blog.likes + 1,
+      likes: likes + 1,
       id: blog.id
     })
   }
@@ -30,9 +31,14 @@ const Blog = ({ blog, data }) =>
       </div>
       <div style={showWhenVisible}>
         <p>URL: {blog.url}</p>
-        <p>Likes: {blog.likes}</p><button onClick={like}>Like</button>
+        <p>Likes: {likes}</p><button onClick={like}>Like</button>
         <button onClick={toggleVisibility}>Close</button>
       </div>
+      <DelBlog
+        deleteData={deleteData}
+        id={blog.id}
+        title={blog.title}
+      />
     </div>  
   )
 }

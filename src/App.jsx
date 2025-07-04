@@ -94,7 +94,16 @@ const App = () => {
     console.log('blogs ', blogs)
     console.log('newBlogs ', newBlogs)
     setBlogs(newBlogs)
-    location.reload()
+  }
+
+  const deleteBlog = async ({ title, id }) =>
+  {
+    if (window.confirm(`Are you sure you want to delete ${title}`))
+    {
+      await blogService.remove(id)
+      const newBlogs = blogs.filter(b => b.id !== id)
+      setBlogs(newBlogs)
+    }
   }
 
   return (
@@ -113,7 +122,8 @@ const App = () => {
         <Togglable buttonLabel="Blogs">
           <Blogs 
             blogs={blogs}
-            data={like}
+            likeData={like}
+            deleteData={deleteBlog}
           />
         </Togglable> 
       </div>
