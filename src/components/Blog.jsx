@@ -1,7 +1,7 @@
-import { useState } from "react"
-import DelBlog from "./DelBlog"
+import { useState } from 'react'
+import DelBlog from './DelBlog'
 
-const Blog = ({ blog, likeData, deleteData }) => 
+const Blog = ({ blog, likeData, deleteData }) =>
 {
   const [visible, setVisible] = useState(false)
   const [likes, setLikes] = useState(blog.likes)
@@ -39,7 +39,7 @@ const Blog = ({ blog, likeData, deleteData }) =>
         id={blog.id}
         title={blog.title}
       />
-    </div>  
+    </div>
   )
 }
 

@@ -14,22 +14,22 @@ const App = () => {
   const [errorStatus, setErrorStatus] = useState('')
   const [user, setUser] = useState(null)
 
-  const blogFormRef = useRef()  
+  const blogFormRef = useRef()
 
   const notify = (label, message) =>
   {
-    setErrorStatus(label);
-    setErrorMessage(message);
-    setTimeout(() => {setErrorMessage(null)}, 5000);
+    setErrorStatus(label)
+    setErrorMessage(message)
+    setTimeout(() => {setErrorMessage(null)}, 5000)
   }
 
   useEffect(() => {
     blogService.getAll().then(blogs =>
       setBlogs(blogs)
-    )  
+    )
   }, [])
 
-  useEffect(()=>
+  useEffect(() =>
   {
     const loggedUserJSON = window.localStorage.getItem('loggedBlogUser')
     if (loggedUserJSON)
@@ -62,9 +62,9 @@ const App = () => {
   const handleLogout = () =>
   {
     window.localStorage.removeItem('loggedBlogUser')
-      blogService.setToken('')
-      setUser('')
-      location.reload()
+    blogService.setToken('')
+    setUser('')
+    location.reload()
   }
 
   // add all handlers here
@@ -81,10 +81,10 @@ const App = () => {
     {
       console.log(exception)
       notify('error', 'Cannot Add Blog')
-    } 
+    }
   }
 
-  const like = async ({title, author, url, likes, id}) =>
+  const like = async ({ title, author, url, likes, id }) =>
   {
     const updateObject = { title, author, url, likes }
     const res = await blogService.update(id, updateObject)
@@ -113,23 +113,23 @@ const App = () => {
         errorStatus={errorStatus}
       />
       { user
-      ? <div>
-        <p>{user.name} currently logged in</p>
-        <button onClick={handleLogout}>Log Out</button>
-        <Togglable buttonLabel="New Blog" ref={blogFormRef}>
-          <BlogForm newObject={addBlog} />
-        </Togglable>
-        <Togglable buttonLabel="Blogs">
-          <Blogs 
-            blogs={blogs}
-            likeData={like}
-            deleteData={deleteBlog}
-          />
-        </Togglable> 
-      </div>
-      : <Togglable buttonLabel="Login">
-        <LoginForm userCreds={login} />
-      </Togglable> }
+        ? <div>
+          <p>{user.name} currently logged in</p>
+          <button onClick={handleLogout}>Log Out</button>
+          <Togglable buttonLabel="New Blog" ref={blogFormRef}>
+            <BlogForm newObject={addBlog} />
+          </Togglable>
+          <Togglable buttonLabel="Blogs">
+            <Blogs
+              blogs={blogs}
+              likeData={like}
+              deleteData={deleteBlog}
+            />
+          </Togglable>
+        </div>
+        : <Togglable buttonLabel="Login">
+          <LoginForm userCreds={login} />
+        </Togglable> }
     </div>
   )
 }

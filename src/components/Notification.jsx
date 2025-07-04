@@ -1,11 +1,11 @@
 const Notification = ({
-    errorMessage,
-    errorStatus
+  errorMessage,
+  errorStatus
 }) =>
 {
-    return errorMessage === null
-        ? null
-        : <div className={errorStatus}>{errorMessage}</div>
+  return errorMessage === null
+    ? null
+    : <div className={errorStatus}>{errorMessage}</div>
 }
 
-export default Notification;
+export default Notification
