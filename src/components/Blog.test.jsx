@@ -24,7 +24,7 @@ test('renders content', () =>
   expect(div).toHaveTextContent('Title: Hello All')
 })
 
-test('clicking the button calls event handler once', async () =>
+test('clicking the button twice calls event handler twice', async () =>
 {
   const blog =
   {
@@ -41,8 +41,9 @@ test('clicking the button calls event handler once', async () =>
   const button = screen.getByText("Like")
   screen.debug(button)
   await user.click(button)
+  await user.click(button)
 
-  expect(mockHandler.mock.calls).toHaveLength(1)
+  expect(mockHandler.mock.calls).toHaveLength(2)
 })
 
 test('Blog renders title and author by default but not url and likes', async () =>
