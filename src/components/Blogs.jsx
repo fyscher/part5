@@ -8,7 +8,7 @@ const Blogs = ({ blogs, likeData, deleteData }) =>
     <div className='blogs'>
       <h2>blogs</h2>
       {blogs.map(blog =>
-        <div key={`D_${blog.id}`} className='blog'>
+        <div key={`D_${blog.id}`}>
           <Blog
             blog={blog}
             likeData={likeData}

@@ -50,7 +50,7 @@ const LoginForm = ({
   )
 }
 
-LoginForm.PropTypes =
+LoginForm.propTypes =
 {
   userCreds: PropTypes.func.isRequired
 }
