@@ -57,10 +57,33 @@ test('Blog renders title and author by default but not url and likes', async () 
 
   const { container } = render(<Blog blog={blog} />)
 
-  screen.debug(container)
   const topHalf = container.querySelector('.top-half')
   const bottomHalf = container.querySelector('.bottom-half')
 
   expect(topHalf).not.toHaveStyle('display: none')
   expect(bottomHalf).toHaveStyle('display: none')
+})
+
+test('Blog renders url and likes when toggle is clicked', async () =>
+{
+  const blog = 
+  {
+    title: 'Hello All',
+    author: 'Me',
+    url: 'www.com',
+    likes: 0
+  }
+
+  const { container } = render(<Blog blog={blog} />)
+
+  const topHalf = container.querySelector('.top-half')
+  const bottomHalf = container.querySelector('.bottom-half')
+  const user = userEvent.setup()
+  const button = screen.getByText('View')
+  
+  await user.click(button)
+
+  expect(topHalf).not.toHaveStyle('display: none')
+  expect(bottomHalf).not.toHaveStyle('display: none')
+
 })
