@@ -27,10 +27,7 @@ const App = () => {
     blogService.getAll().then(blogs =>
       setBlogs(blogs)
     )
-  }, [])
-
-  useEffect(() =>
-  {
+    
     const loggedUserJSON = window.localStorage.getItem('loggedBlogUser')
     if (loggedUserJSON)
     {
@@ -88,11 +85,7 @@ const App = () => {
   {
     const updateObject = { title, author, url, likes }
     const res = await blogService.update(id, updateObject)
-    console.log('res ', res)
-    console.log('res.id ', res.id)
     const newBlogs = blogs.map( i => i.id !== res.id? i: res)
-    console.log('blogs ', blogs)
-    console.log('newBlogs ', newBlogs)
     setBlogs(newBlogs)
   }
 
@@ -103,6 +96,7 @@ const App = () => {
       await blogService.remove(id)
       const newBlogs = blogs.filter(b => b.id !== id)
       setBlogs(newBlogs)
+      notify('success', `${title} has been deleted!`)
     }
   }
 
@@ -124,12 +118,11 @@ const App = () => {
               blogs={blogs}
               likeData={like}
               deleteData={deleteBlog}
+              user={user}
             />
           </Togglable>
         </div>
-        : <Togglable buttonLabel="Login">
-          <LoginForm userCreds={login} />
-        </Togglable> }
+        : <LoginForm userCreds={login} /> }
     </div>
   )
 }

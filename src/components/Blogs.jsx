@@ -1,6 +1,6 @@
 import Blog from './Blog'
 
-const Blogs = ({ blogs, likeData, deleteData }) =>
+const Blogs = ({ blogs, likeData, deleteData, user }) =>
 {
   blogs.sort(( a, b ) => b.likes - a.likes)
 
@@ -13,6 +13,7 @@ const Blogs = ({ blogs, likeData, deleteData }) =>
             blog={blog}
             likeData={likeData}
             deleteData={deleteData}
+            user={user}
           />
         </div>
       )}

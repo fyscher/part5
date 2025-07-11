@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import DelBlog from './DelBlog'
 
-const Blog = ({ blog, likeData, deleteData }) =>
+const Blog = ({ blog, likeData, deleteData, user }) =>
 {
   const [visible, setVisible] = useState(false)
   const [likes, setLikes] = useState(blog.likes)
@@ -22,23 +22,29 @@ const Blog = ({ blog, likeData, deleteData }) =>
     })
   }
 
+  console.log('blog: ', blog)
+  console.log('user: ', user)
+
   return(
     <div id={blog.id} className='blog'>
       <div className='top-half'>
         <p>Title: {blog.title}</p>
         <p>Author: {blog.author}</p>
-        <button style={hideWhenVisible} onClick={toggleVisibility}>View</button>
+        <button style={hideWhenVisible} onClick={toggleVisibility} data-cy="view" >View</button>
       </div>
       <div style={showWhenVisible} className='bottom-half'>
         <p>URL: {blog.url}</p>
-        <p>Likes: {likes}</p><button onClick={like}>Like</button>
+        <p>Likes: {likes}</p>
+        <button onClick={like} data-cy="Like" >Like</button>
         <button onClick={toggleVisibility}>Close</button>
       </div>
-      <DelBlog
+      { blog.user.username === user.username
+      ? <DelBlog
         deleteData={deleteData}
         id={blog.id}
         title={blog.title}
       />
+      :<></> }
     </div>
   )
 }

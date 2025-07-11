@@ -5,7 +5,7 @@ const Notification = ({
 {
   return errorMessage === null
     ? null
-    : <div className={errorStatus}>{errorMessage}</div>
+    : <div data-cy="error" className={errorStatus}>{errorMessage}</div>
 }
 
 export default Notification

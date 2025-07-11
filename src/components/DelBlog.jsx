@@ -8,7 +8,7 @@ const DelBlog = ({ deleteData, id, title }) =>
       id
     })
   }
-  return <button type="button" onClick={deleteBlog}>Delete</button>
+  return <button type="button" onClick={deleteBlog} data-cy="delete" >Delete</button>
 }
 
 export default DelBlog

@@ -34,6 +34,7 @@ const BlogForm = ({ newObject }) =>
             onChange={handleTitleChange}
             placeholder='Title'
             id='Title'
+            data-cy="title"
           />
         </div>
         <div>
@@ -42,6 +43,7 @@ const BlogForm = ({ newObject }) =>
             onChange={handleAuthorChange}
             placeholder='Author'
             id='Author'
+            data-cy="author"
           />
         </div>
         <div>
@@ -50,6 +52,7 @@ const BlogForm = ({ newObject }) =>
             onChange={handleURLChange} 
             placeholder='URL'
             id='URL'
+            data-cy="url"
           />
         </div>
         <button type="submit">Create</button>
