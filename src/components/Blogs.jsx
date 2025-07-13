@@ -2,7 +2,6 @@ import Blog from './Blog'
 
 const Blogs = ({ blogs, likeData, deleteData, user }) =>
 {
-  blogs.sort(( a, b ) => b.likes - a.likes)
 
   return(
     <div className='blogs'>

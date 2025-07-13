@@ -51,3 +51,11 @@ Cypress.Commands.add('createBlog', ({ title, author, url }) =>
 
     cy.visit('')
 })
+
+Cypress.Commands.add('likeBlog', (num) =>
+{
+    cy.intercept('PUT', '/api/blogs/*').as('likeBlog')
+    cy.get('[data-cy="Like"]').eq(num).click()
+    cy.wait('@likeBlog')
+
+})

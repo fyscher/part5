@@ -85,7 +85,9 @@ const App = () => {
   {
     const updateObject = { title, author, url, likes }
     const res = await blogService.update(id, updateObject)
-    const newBlogs = blogs.map( i => i.id !== res.id? i: res)
+    const newBlogs = blogs
+      .map( i => i.id !== res.id? i: res)
+      .sort(( a, b ) => b.likes - a.likes)
     setBlogs(newBlogs)
   }
 

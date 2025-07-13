@@ -152,5 +152,52 @@ describe('Blog app', function()
 
       cy.get('html').should('contain', 'NEWER TITLE has been deleted!')
     })
+
+    it('blogs are all sorted by Likes descending', function()
+    {
+      cy.login({
+        username: 'fyscher',
+        password: 'test2'
+      })
+
+      cy.createBlog({
+        title: 'NEW TITLE',
+        author: 'NEW AUTHOR',
+        url: 'NEW URL'
+      })
+
+      cy.createBlog({
+        title: 'NEWER TITLE',
+        author: 'NEWER AUTHOR',
+        url: 'NEWER URL'
+      })
+      
+      cy.createBlog({
+        title: 'NEWEST TITLE',
+        author: 'NEWEST AUTHOR',
+        url: 'NEWEST URL'
+      })
+      
+      cy.contains('Blogs').click()
+      cy.get('[data-cy="Blog"]').then( () =>
+      {
+        cy.get('[data-cy="view"]').click({ multiple: true })
+        cy.likeBlog(0)
+        cy.likeBlog(0)
+        cy.likeBlog(0)
+        cy.likeBlog(1)
+        cy.likeBlog(1)
+        cy.likeBlog(1)
+        cy.likeBlog(1)
+        cy.likeBlog(2)
+      })
+
+      cy.get('[data-cy="Blog"]').eq(0).should('contain', 'NEWER TITLE')
+      cy.get('[data-cy="Blog"]').eq(1).should('contain', 'NEW TITLE')
+      cy.get('[data-cy="Blog"]').eq(2).should('contain', 'NEWEST TITLE')
+
+        cy.get('html').should('contain', 'NEW TITLE')
+      
+    })
   })
 })

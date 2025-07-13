@@ -26,7 +26,7 @@ const Blog = ({ blog, likeData, deleteData, user }) =>
   console.log('user: ', user)
 
   return(
-    <div id={blog.id} className='blog'>
+    <div id={blog.id} className='blog' data-cy="Blog">
       <div className='top-half'>
         <p>Title: {blog.title}</p>
         <p>Author: {blog.author}</p>
